@@ -3,16 +3,13 @@
 <ul>
     {% for parroquia in parroquias %}
     <li>
-        <strong>{{ parroquia.nombre }}</strong> ({{ parroquia.tipo }} - {{
-        parroquia.ubicacion }})
+        <strong>{{ parroquia.nombre }}</strong> ({{ parroquia.tipo }} - {{ parroquia.ubicacion }})
         <ul>
             <li>
-                <strong>Total de parques en la parroquia:</strong> {{
-                parroquia.total_parques }}
+                <strong>Total de parques en la parroquia:</strong> {{ parroquia.total_parques }}
             </li>
             <li>
-                <strong>Profesiones de los presidentes:</strong> {{
-                parroquia.profesiones_presidentes }}
+                <strong>Profesiones de los presidentes:</strong> {{ parroquia.profesiones_presidentes }}
             </li>
             <li>
                 <strong>Listado de Barrios:</strong>

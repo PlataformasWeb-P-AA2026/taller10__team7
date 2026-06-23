@@ -20,4 +20,9 @@ from django.urls import path
 
 from . import views
 
-urlpatterns = [path("", views.index, name="index")]
+urlpatterns = [
+    path("", views.index, name="index"),
+    path("barrios/", views.listar_barrios, name="listar_barrios"),
+    path("barrios/crear/", views.crear_barrio, name="crear_barrio"),
+    path("barrios/editar/<int:id>", views.editar_barrio, name="editar_barrio"),
+]

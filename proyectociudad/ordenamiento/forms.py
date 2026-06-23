@@ -7,3 +7,21 @@ class ParroquiaForm(ModelForm):
     class Meta:
         model = Parroquia
         fields = ["nombre", "ubicacion", "tipo"]
+
+class BarrioForm(ModelForm):
+    class Meta:
+        model = Barrio 
+        fields = ['nombre', 'num_viviendas', 'num_parques', 'num_edificios_residenciales','parroquia'] 
+    
+
+class BarrioParroquiaForm(ModelForm): 
+
+    def __init__(self, barrio, *args, **kwargs):
+        super(BarrioParroquiaForm, self).__init__(*args, **kwargs)
+        self.initial['barrio'] = barrio
+        self.fields["barrio"].widget = forms.widgets.HiddenInput()
+        print(barrio)
+
+    class Meta:
+        model = Barrio 
+        fields = ['nombre', 'num_viviendas', 'num_parques', 'num_edificios_residenciales','parroquia'] 

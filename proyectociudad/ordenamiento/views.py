@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
 from ordenamiento.models import *
+from ordenamiento.forms import *
+
 
 
 # Create your views here.
@@ -19,3 +21,65 @@ def index(request):
     }
 
     return render(request, "index.html", informacion_template)
+
+def listar_barrios(request):
+    barrios = Barrio.objects.all()
+
+    informacion_template = {
+        "barrios": barrios,
+        "numero_barrios": len(barrios),
+    }
+
+    return render(request, "barrios.html", informacion_template)
+
+def crear_barrio(request):
+    """
+    """
+
+    if request.method=='POST':
+        formulario = BarrioForm(request.POST)
+        print(formulario.errors)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(index)
+    else:
+        formulario = BarrioForm()
+    diccionario = {'formulario': formulario}
+
+    return render(request, 'crearBarrio.html', diccionario)
+
+
+def editar_barrio(request, id):
+    """
+    """
+    barrio = Barrio.objects.get(pk=id)
+    if request.method=='POST':
+        formulario = BarrioForm(request.POST, instance=telefono)
+        print(formulario.errors)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(index)
+    else:
+        formulario = Barrio(instance=barrio)
+    diccionario = {'formulario': formulario}
+
+    return render(request, 'crearBarrio.html', diccionario)
+
+def crear_barrio_parroquia(request, id):
+    """
+    """
+
+    barrio = Barrio.objects.get(pk=id)
+    print(barrio)
+    
+    if request.method=='POST':
+        formulario = BarrioParroquiaForm(barrio, request.POST)
+        print(formulario.errors)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(index)
+    else:
+        formulario = BarrioParroquiaForm(barrio)
+    diccionario = {'formulario': formulario, 'barrio': barrio}
+
+    return render(request, 'crearBarrioParroquia.html', diccionario)

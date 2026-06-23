@@ -1,9 +1,11 @@
 <h3>Número de parroquias registradas: {{ numero_parroquias }}</h3>
+[<a href="{% url 'crear_parroquia' %}">Crear Parroquia</a>]
 
 <ul>
     {% for parroquia in parroquias %}
     <li>
         <strong>{{ parroquia.nombre }}</strong> ({{ parroquia.tipo }} - {{ parroquia.ubicacion }})
+        <a href="{% url 'editar_parroquia' parroquia.id %}">Editar</a>
         <ul>
             <li>
                 <strong>Total de parques en la parroquia:</strong> {{ parroquia.total_parques }}

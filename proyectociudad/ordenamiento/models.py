@@ -10,6 +10,24 @@ class Parroquia(models.Model):
     ubicacion = models.CharField("Ubicación", max_length=50)  # norte, sur, este, oeste
     tipo = models.CharField("Tipo de parroquia", max_length=50)  # urbana, rural
 
+    def total_parques(self):
+        """Suma el número de parques de todos sus barrios relacionados"""
+        total = 0
+        for barrio in self.mis_barrios.all():
+            total += barrio.num_parques
+        return total
+
+    def profesiones_presidentes(self):
+        """Obtiene una lista única de las profesiones de los presidentes de sus barrios"""
+        profesiones = []
+        for barrio in self.mis_barrios.all():
+            for presidente in barrio.mis_presidentes.all():
+                if presidente.profesion not in profesiones:
+                    profesiones.append(presidente.profesion)
+
+        # Unimos la lista separada por comas, o mostramos un mensaje por defecto
+        return ", ".join(profesiones) if profesiones else "Sin presidentes registrados"
+
     def __str__(self):
         return "Parroquia: %s - Ubicación: %s - Tipo: %s" % (
             self.nombre,

@@ -1,0 +1,36 @@
+<h3>Número de parroquias registradas: {{ numero_parroquias }}</h3>
+
+<ul>
+    {% for parroquia in parroquias %}
+    <li>
+        <strong>{{ parroquia.nombre }}</strong> ({{ parroquia.tipo }} - {{
+        parroquia.ubicacion }})
+        <ul>
+            <li>
+                <strong>Total de parques en la parroquia:</strong> {{
+                parroquia.total_parques }}
+            </li>
+            <li>
+                <strong>Profesiones de los presidentes:</strong> {{
+                parroquia.profesiones_presidentes }}
+            </li>
+            <li>
+                <strong>Listado de Barrios:</strong>
+                <ul>
+                    {% for barrio in parroquia.mis_barrios.all %}
+                    <li>
+                        {{ barrio.nombre }} - Parques: {{ barrio.num_parques }}
+                        - Viviendas: {{ barrio.num_viviendas }}
+                    </li>
+                    {% empty %}
+                    <li>
+                        <em>No hay barrios registrados para esta parroquia.</em>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+        <br />
+    </li>
+    {% endfor %}
+</ul>

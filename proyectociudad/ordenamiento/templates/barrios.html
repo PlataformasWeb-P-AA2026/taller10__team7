@@ -1,4 +1,5 @@
-[<a href="{% url 'index' %}">inicio</a>][<a href="{% url 'index' %}">parroquias</a>][<a href="{% url 'listar_barrios' %}">barrios</a>][<a href="{% url 'index' %}">Crear parroquias</a>][<a href="{% url 'crear_barrio' %}">Crear barrios</a>]
+[<a href="{% url 'index' %}">Parroquias</a>][<a href="{% url 'listar_barrios' %}">Barrios</a>][<a
+    href="{% url 'crear_parroquia' %}">Crear parroquias</a>][<a href="{% url 'crear_barrio' %}">Crear barrios</a>]
 <h1>Listado de Barrios</h1>
 
 <p>Total de barrios: {{ numero_barrios }}</p>
@@ -11,6 +12,7 @@
         - Parques: {{ barrio.num_parques }}
         - Edificios: {{ barrio.num_edificios_residenciales }}
         - Parroquia: {{ barrio.parroquia.nombre }}
+        [<a href="{% url 'editar_barrio' barrio.id %}">Editar</a>]
     </li>
     {% endfor %}
 </ul>

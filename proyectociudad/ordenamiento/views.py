@@ -55,38 +55,6 @@ def editar_parroquia(request, id):
 
     return render(request, "editarParroquia.html", diccionario)
 
-# Funciones de Parroquia
-def crear_parroquia(request):
-    """ Crear nueva parroquia """
-    print(request)
-    if request.method == "POST":
-        formulario = ParroquiaForm(request.POST)
-        print(formulario.errors)
-        if formulario.is_valid():
-            formulario.save()
-            return redirect(index)
-    else:
-        formulario = ParroquiaForm()
-    diccionario = {"formulario": formulario}
-
-    return render(request, "crearParroquia.html", diccionario)
-
-def editar_parroquia(request, id):
-    """ Editar Parroquia """
-    parroquia = Parroquia.objects.get(pk=id)
-    print(request)
-    if request.method == "POST":
-        formulario = ParroquiaForm(request.POST, instance=parroquia)
-        print(formulario.errors)
-        if formulario.is_valid():
-            formulario.save()
-            return redirect(index)
-    else:
-        formulario = ParroquiaForm(instance=parroquia)
-    diccionario = {"formulario": formulario}
-
-    return render(request, "editarParroquia.html", diccionario)
-
 def listar_barrios(request):
     barrios = Barrio.objects.all()
 
@@ -119,32 +87,13 @@ def editar_barrio(request, id):
     """
     barrio = Barrio.objects.get(pk=id)
     if request.method=='POST':
-        formulario = BarrioForm(request.POST, instance=telefono)
+        formulario = BarrioForm(request.POST, instance=barrio)
         print(formulario.errors)
         if formulario.is_valid():
             formulario.save()
             return redirect(index)
     else:
-        formulario = Barrio(instance=barrio)
+        formulario = BarrioForm(instance=barrio)
     diccionario = {'formulario': formulario}
 
-    return render(request, 'crearBarrio.html', diccionario)
-
-def crear_barrio_parroquia(request, id):
-    """
-    """
-
-    barrio = Barrio.objects.get(pk=id)
-    print(barrio)
-    
-    if request.method=='POST':
-        formulario = BarrioParroquiaForm(barrio, request.POST)
-        print(formulario.errors)
-        if formulario.is_valid():
-            formulario.save()
-            return redirect(index)
-    else:
-        formulario = BarrioParroquiaForm(barrio)
-    diccionario = {'formulario': formulario, 'barrio': barrio}
-
-    return render(request, 'crearBarrioParroquia.html', diccionario)
+    return render(request, 'editarBarrio.html', diccionario)
